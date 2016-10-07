@@ -1,6 +1,6 @@
 {
   "name": "active-enzyme",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Boilerplate-free Enzyme testing",
   "main": "build.js",
   "scripts": {
