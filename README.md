@@ -63,7 +63,6 @@ The two main features at work here are:
 Since the most common usage pattern is that you have a bunch of tests all testing the same component, there is a `makeRenderer()` utility which allows the individual tests to simply vary the props they're going to render it with:
 
 ```javascript
-import React from 'react'
 import { makeRenderer } from 'active-enzyme'
 import Greeting from './Greeting'
 
@@ -83,3 +82,5 @@ it('greets in multiple languages', () => {
   expect(greeting.text()).toBe(`Hello, ${name}!`)
 })
 ```
+
+This has the nice added bonus that you no longer need to import React in your test suites!
