@@ -101,3 +101,28 @@ it('greets in multiple languages', () => {
   expect(greeting.text()).toBe(`Hello, ${name}!`)
 })
 ```
+
+Finally, since the most common usage pattern is that you have a bunch of tests all testing the same component, possibly with associated CSS Modules, there is a `makeAnalyzer()` utility which allows the individual tests to simply vary the props they're going to pass to it when rendering:
+
+```javascript
+import React from 'react'
+import { shallow } from 'active-enzyme'
+import Greeting from './Greeting'
+import styles from './Greeting.css'
+
+const analyze = makeAnalyzer(Greeting, styles)
+
+it('greets in multiple languages', () => {
+  const name = 'John'
+
+  const { greeting, switchLanguage } = analyze({ name })
+
+  expect(greeting.text()).toBe(`Hello, ${name}!`)
+
+  switchLanguage.simulate('click')
+  expect(greeting.text()).toBe(`Bonjour, ${name}!`)
+
+  switchLanguage.simulate('click')
+  expect(greeting.text()).toBe(`Hello, ${name}!`)
+})
+```
