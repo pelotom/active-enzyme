@@ -2,7 +2,7 @@
   "name": "active-enzyme",
   "version": "0.0.1",
   "description": "Boilerplate-free Enzyme testing",
-  "main": "active-enzyme.js",
+  "main": "build.js",
   "scripts": {
     "build": "babel --minified -o build.js src/active-enzyme.js",
     "test": "jest --env=jsdom",
