@@ -1,3 +1,5 @@
+import { createElement } from 'react'
+
 import {
   shallow as enzymeShallow,
   mount as enzymeMount,
@@ -17,6 +19,14 @@ export function mount(...args) {
 export function render(...args) {
   const wrapper = enzymeRender(...args)
   return activate(() => wrapper)
+}
+
+export function makeAnalyzer(component, styles, opts = {}) {
+    const transform = (transform => props => removeUndefined(transform(props)))(opts.transform || (props => props))
+
+    const render = opts.type || shallow
+
+    return (props = {}) => render(createElement(component, transform(props))).lookup(styles)
 }
 
 function activate(findMyself) {
@@ -39,4 +49,13 @@ function activate(findMyself) {
       }
     }
   })
+}
+
+function removeUndefined(obj) {
+    const result = { ...obj }
+    for (const key in result) {
+        if (result[key] === undefined)
+            delete result[key]
+    }
+    return result
 }
