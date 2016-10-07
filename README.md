@@ -106,7 +106,7 @@ Finally, since the most common usage pattern is that you have a bunch of tests a
 
 ```javascript
 import React from 'react'
-import { shallow } from 'active-enzyme'
+import { makeAnalyzer } from 'active-enzyme'
 import Greeting from './Greeting'
 import styles from './Greeting.css'
 
