@@ -26,12 +26,14 @@ function activate(findMyself) {
       switch (key) {
         case 'find':
           return find
-        case 'classes':
-          return new Proxy({}, {
+        case 'classes': {
+          const p = new Proxy({}, {
             get(target, key) {
               return find(`.${key}`)
             }
           })
+          return () => p
+        }
         default:
           return findMyself()[key]
       }

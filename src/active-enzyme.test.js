@@ -6,7 +6,10 @@ it('greets in multiple languages', () => {
   ['shallow', 'mount'].forEach(method => {
     const name = 'John'
 
-    const { greeting, switchLanguage } = renderers[method](<Greeting name={name} />).classes
+    const {
+      greeting,
+      switchLanguage
+    } = renderers[method](<Greeting name={name} />).classes()
 
     expect(greeting.text()).toBe(`Hello, ${name}!`)
 
