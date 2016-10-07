@@ -54,5 +54,5 @@ it('greets in multiple languages', () => {
 
 The two main features at work here are:
 
-1. Enzyme wrapper components acquire a special `classes` field which allows you to query based on a class names. This is nice because it allows you to use ES2015 destructuring syntax as above to select all the rendered elements you care about for a given test.
+1. Enzyme wrapper objects acquire a special `classes` field which allows you to query based on a class names. This is nice because it allows you to use ES2015 destructuring syntax as above to select all the rendered elements you care about for a given test.
 1. The first feature wouldn't be very useful with regular Enzyme if your test triggers re-renders of the element tree (as is happening here implicitly as a result of the `'click'` events), because the `greeting` and `switchLanguage` wrappers are normally immutable. This library instead returns *active* wrappers, which change in response to the element tree being re-rendered.
