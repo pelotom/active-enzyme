@@ -12,9 +12,7 @@ In a nutshell, a test such as this:
 
 ```javascript
 import React from 'react'
-
 import { shallow } from 'enzyme'
-
 import Greeting from './Greeting'
 
 it('greets in multiple languages', () => {
@@ -35,9 +33,9 @@ it('greets in multiple languages', () => {
 can instead be written like this:
 
 ```javascript
-import React, { Component } from 'react'
-
+import React from 'react'
 import { shallow } from './active-enzyme'
+import Greeting from './Greeting'
 
 it('greets in multiple languages', () => {
   const name = 'John'
