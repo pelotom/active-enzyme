@@ -21,32 +21,26 @@ export function render(...args) {
   return activate(() => wrapper)
 }
 
-export function makeAnalyzer(component, styles, opts = {}) {
-    const transform = (transform => props => removeUndefined(transform(props)))(opts.transform || (props => props))
-
-    const render = opts.type || shallow
-
-    return (props = {}) => render(createElement(component, transform(props))).lookup(styles)
+export function makeRenderer(component, {
+  method = shallow,
+  transform = props => props,
+  enzymeOptions
+} = {}) {
+  const doTransform = props => removeUndefined(transform(props))
+  return (props = {}) => method(createElement(component, doTransform(props)), enzymeOptions)
 }
 
 function activate(findMyself) {
+  const find = (...findArgs) => activate(() => findMyself().find(...findArgs))
+  const classes = new Proxy({}, {
+    get(target, name) {
+      return find(`.${name}`)
+    }
+  })
+  const overrides = { find, classes }
   return new Proxy(findMyself(), {
     get(target, key) {
-      const find = (...findArgs) => activate(() => findMyself().find(...findArgs))
-      switch (key) {
-        case 'find':
-          return find
-        case 'lookup':
-          return classMap => new Proxy({}, {
-            get(target, name) {
-              if (classMap)
-                name = classMap[name].split(' ')[0]
-              return find(`.${name}`)
-            }
-          })
-        default:
-          return findMyself()[key]
-      }
+      return overrides[key] || findMyself()[key]
     }
   })
 }

@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 
-import * as renderers from './active-enzyme'
+import * as activeEnzyme from './active-enzyme'
 
 describe('shallow wrapper', () => {
   it('is active', () => {
-    ['shallow', 'mount'].forEach(method => {
+    ['shallow', 'mount'].forEach(methodName => {
+      const render = activeEnzyme.makeRenderer(Greeting, { method: activeEnzyme[methodName] })
+
       const name = 'John'
 
       const {
         greeting,
         switchLanguage
-      } = renderers[method](<Greeting name={name} />).lookup()
+      } = render({ name }).classes
 
       expect(greeting.text()).toBe(`Hello, ${name}!`)
 
@@ -19,30 +21,6 @@ describe('shallow wrapper', () => {
 
       switchLanguage.simulate('click')
       expect(greeting.text()).toBe(`Hello, ${name}!`)
-    })
-  })
-})
-
-describe('selector mapping', () => {
-  it('works', () => {
-    ['shallow', 'mount'].forEach(method => {
-      const name = 'John'
-
-      const {
-        greetingRenamed,
-        switchLanguageRenamed
-      } = renderers[method](<Greeting name={name} />).lookup({
-        greetingRenamed: 'greeting',
-        switchLanguageRenamed: 'switchLanguage',
-      })
-
-      expect(greetingRenamed.text()).toBe(`Hello, ${name}!`)
-
-      switchLanguageRenamed.simulate('click')
-      expect(greetingRenamed.text()).toBe(`Bonjour, ${name}!`)
-
-      switchLanguageRenamed.simulate('click')
-      expect(greetingRenamed.text()).toBe(`Hello, ${name}!`)
     })
   })
 })
