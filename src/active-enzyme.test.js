@@ -10,7 +10,7 @@ describe('shallow wrapper', () => {
       const {
         greeting,
         switchLanguage
-      } = renderers[method](<Greeting name={name} />).classes()
+      } = renderers[method](<Greeting name={name} />).lookup()
 
       expect(greeting.text()).toBe(`Hello, ${name}!`)
 
@@ -31,7 +31,7 @@ describe('selector mapping', () => {
       const {
         greetingRenamed,
         switchLanguageRenamed
-      } = renderers[method](<Greeting name={name} />).classes({
+      } = renderers[method](<Greeting name={name} />).lookup({
         greetingRenamed: 'greeting',
         switchLanguageRenamed: 'switchLanguage',
       })

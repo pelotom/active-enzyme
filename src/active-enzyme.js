@@ -26,7 +26,7 @@ function activate(findMyself) {
       switch (key) {
         case 'find':
           return find
-        case 'classes':
+        case 'lookup':
           return classMap => new Proxy({}, {
             get(target, name) {
               if (classMap)
