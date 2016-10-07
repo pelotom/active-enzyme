@@ -1,0 +1,58 @@
+{
+  "name": "active-enzyme",
+  "version": "0.0.1",
+  "description": "Eliminate Enzyme requerying boilerplate",
+  "main": "active-enzyme.js",
+  "scripts": {
+    "build": "babel --minified -o build.js src/active-enzyme.js",
+    "test": "jest",
+    "test:watch": "npm test -- --watch",
+    "release": "xyz",
+    "release:patch": "xyz --increment patch",
+    "release:minor": "xyz --increment minor",
+    "release:major": "xyz --increment major"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pelotom/active-enzyme.git"
+  },
+  "keywords": [
+    "object",
+    "property",
+    "undefined",
+    "proxy"
+  ],
+  "author": "Tom Crockett",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pelotom/active-enzyme/issues"
+  },
+  "homepage": "https://github.com/pelotom/active-enzyme#readme",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "peerDependencies": {
+    "enzyme": "*"
+  },
+  "devDependencies": {
+    "babel-cli": "6.14.0",
+    "babel-plugin-transform-class-properties": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "enzyme": "^2.4.1",
+    "jest": "15.1.1",
+    "react": "^15.3.2",
+    "react-addons-test-utils": "^15.3.2",
+    "xyz": "^1.0.0"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/(build|docs|node_modules)/"
+    ],
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|\\.test)\\.js$",
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ]
+  }
+}
