@@ -2,22 +2,24 @@ import React, { Component } from 'react'
 
 import * as renderers from './active-enzyme'
 
-it('greets in multiple languages', () => {
-  ['shallow', 'mount'].forEach(method => {
-    const name = 'John'
+describe('shallow wrapper', () => {
+  it('is active', () => {
+    ['shallow', 'mount'].forEach(method => {
+      const name = 'John'
 
-    const {
-      greeting,
-      switchLanguage
-    } = renderers[method](<Greeting name={name} />).classes()
+      const {
+        greeting,
+        switchLanguage
+      } = renderers[method](<Greeting name={name} />).classes()
 
-    expect(greeting.text()).toBe(`Hello, ${name}!`)
+      expect(greeting.text()).toBe(`Hello, ${name}!`)
 
-    switchLanguage.simulate('click')
-    expect(greeting.text()).toBe(`Bonjour, ${name}!`)
+      switchLanguage.simulate('click')
+      expect(greeting.text()).toBe(`Bonjour, ${name}!`)
 
-    switchLanguage.simulate('click')
-    expect(greeting.text()).toBe(`Hello, ${name}!`)
+      switchLanguage.simulate('click')
+      expect(greeting.text()).toBe(`Hello, ${name}!`)
+    })
   })
 })
 
