@@ -1,7 +1,21 @@
-import { shallow } from 'enzyme'
+import {
+  shallow as enzymeShallow,
+  mount as enzymeMount,
+  render as enzymeRender,
+} from 'enzyme'
 
-function render(...args) {
-  const wrapper = shallow(...args)
+export function shallow(...args) {
+  const wrapper = enzymeShallow(...args)
+  return activate(() => wrapper)
+}
+
+export function mount(...args) {
+  const wrapper = enzymeMount(...args)
+  return activate(() => wrapper)
+}
+
+export function render(...args) {
+  const wrapper = enzymeRender(...args)
   return activate(() => wrapper)
 }
 
@@ -24,5 +38,3 @@ function activate(findMyself) {
     }
   })
 }
-
-export default render

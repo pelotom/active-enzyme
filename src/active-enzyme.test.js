@@ -1,19 +1,21 @@
 import React, { Component } from 'react'
 
-import render from './active-enzyme'
+import * as renderers from './active-enzyme'
 
 it('greets in multiple languages', () => {
-  const name = 'John'
+  ['shallow'/*, 'mount', 'render'*/].forEach(method => {
+    const name = 'John'
 
-  const { greeting, switchLanguage } = render(<Greeting name={name} />).classes
+    const { greeting, switchLanguage } = renderers[method](<Greeting name={name} />).classes
 
-  expect(greeting.text()).toBe(`Hello, ${name}!`)
+    expect(greeting.text()).toBe(`Hello, ${name}!`)
 
-  switchLanguage.simulate('click')
-  expect(greeting.text()).toBe(`Bonjour, ${name}!`)
+    switchLanguage.simulate('click')
+    expect(greeting.text()).toBe(`Bonjour, ${name}!`)
 
-  switchLanguage.simulate('click')
-  expect(greeting.text()).toBe(`Hello, ${name}!`)
+    switchLanguage.simulate('click')
+    expect(greeting.text()).toBe(`Hello, ${name}!`)
+  })
 })
 
 // Test component
