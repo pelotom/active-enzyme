@@ -1,7 +1,7 @@
 {
   "name": "active-enzyme",
   "version": "0.0.1",
-  "description": "Eliminate Enzyme requerying boilerplate",
+  "description": "Boilerplate-free Enzyme testing",
   "main": "active-enzyme.js",
   "scripts": {
     "build": "babel --minified -o build.js src/active-enzyme.js",
