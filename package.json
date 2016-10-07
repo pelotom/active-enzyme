@@ -5,8 +5,8 @@
   "main": "active-enzyme.js",
   "scripts": {
     "build": "babel --minified -o build.js src/active-enzyme.js",
-    "test": "jest",
-    "test:watch": "npm test -- --watch --env=jsdom",
+    "test": "jest --env=jsdom",
+    "test:watch": "npm test -- --watch",
     "release": "xyz",
     "release:patch": "xyz --increment patch",
     "release:minor": "xyz --increment minor",
