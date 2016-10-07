@@ -23,6 +23,30 @@ describe('shallow wrapper', () => {
   })
 })
 
+describe('selector mapping', () => {
+  it('works', () => {
+    ['shallow', 'mount'].forEach(method => {
+      const name = 'John'
+
+      const {
+        greetingRenamed,
+        switchLanguageRenamed
+      } = renderers[method](<Greeting name={name} />).classes({
+        greetingRenamed: 'greeting',
+        switchLanguageRenamed: 'switchLanguage',
+      })
+
+      expect(greetingRenamed.text()).toBe(`Hello, ${name}!`)
+
+      switchLanguageRenamed.simulate('click')
+      expect(greetingRenamed.text()).toBe(`Bonjour, ${name}!`)
+
+      switchLanguageRenamed.simulate('click')
+      expect(greetingRenamed.text()).toBe(`Hello, ${name}!`)
+    })
+  })
+})
+
 // Test component
 
 class Greeting extends Component {
