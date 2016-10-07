@@ -34,7 +34,7 @@ can instead be written like this:
 
 ```javascript
 import React from 'react'
-import { shallow } from './active-enzyme'
+import { shallow } from 'active-enzyme'
 import Greeting from './Greeting'
 
 it('greets in multiple languages', () => {
