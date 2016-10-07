@@ -6,7 +6,7 @@ Boilerplate-free Enzyme testing.
 $ npm install --save-dev active-enzyme
 ```
 
-[Enzyme](https://github.com/airbnb/enzyme) is a great tool for performing tests on React components using shallow rendering. This little library augments it with some niceties that allow you to easily lookup an element by `className` and save the resulting `ShallowWrapper` to a variable which is *active*--that is, it doesn't need to be requeried again after things change.
+[Enzyme](https://github.com/airbnb/enzyme) is a great tool for performing tests on React components, especially using shallow rendering. This little library augments it with some niceties that allow you to easily lookup an element by `className` and save the resulting `ShallowWrapper` to a variable which is *active*--that is, it doesn't need to be requeried again after things change.
 
 Say we want to test this component:
 
@@ -65,7 +65,7 @@ it('greets in multiple languages', () => {
 })
 ```
 
-This works fine, but there's quite a bit of repetition of the `wrapper.find(...)` calls. We'd like to be able to extract some variables:
+This works fine, but there's quite a bit of repetition of the `wrapper.find(...)` calls. We might like to be able to extract some variables:
 
 ```javascript
 import React from 'react'
@@ -91,7 +91,7 @@ it('greets in multiple languages', () => {
 })
 ```
 
-Unfortunately this doesn't work, because the `ShallowWrapper` returned by a `find(...)` call is immutable. It won't be modified when we simulate a click, so the greeting text will apparently never switch to French. Instead, we have to re-query from the root wrapper to obtain a new wrapper every time a change occurs. Usually immutability is a wonderful thing, but here it's a bit of a pain! What we really want is active wrappers.
+Unfortunately this doesn't work with shallow rendering, because the `ShallowWrapper` returned by a `find(...)` call is immutable. It won't be modified when we simulate a click, so the greeting text will apparently never switch to French. Instead, we have to re-query from the root wrapper to obtain a new wrapper every time a change occurs. Usually immutability is a wonderful thing, but here it's a bit of a pain! What we really want is active wrappers.
 
 That's where this library comes in:
 
@@ -119,7 +119,7 @@ it('greets in multiple languages', () => {
 })
 ```
 
-Now this test works fine! Additionally, since class-based lookup is such a frequent thing in these tests and because object destructuring is fun and profitable, `active-enzyme` provides a special `classes` field which allows us to magically access wrappers by `className`. That means that instead of
+Now this test works fine! Additionally, since class-based lookups are such a frequent thing in Enzyme tests and because object destructuring is fun and profitable, `active-enzyme` provides a special `classes` field which allows us to magically access wrappers by `className`. That means that instead of
 
 ```javascript
 const wrapper = shallow(<Greeting name={name} />)
@@ -140,7 +140,7 @@ or simply
 const { greeting, switchLanguage } = shallow(<Greeting name={name} />).classes
 ```
 
-The final, result is a very clean and readable testcase:
+The final result is a very clean and readable testcase:
 
 ```javascript
 import React, { Component } from 'react'
