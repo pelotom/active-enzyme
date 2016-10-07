@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import * as renderers from './active-enzyme'
 
 it('greets in multiple languages', () => {
-  ['shallow'/*, 'mount', 'render'*/].forEach(method => {
+  ['shallow', 'mount'].forEach(method => {
     const name = 'John'
 
     const { greeting, switchLanguage } = renderers[method](<Greeting name={name} />).classes
