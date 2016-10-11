@@ -23,11 +23,15 @@ export function render(...args) {
 
 export function makeRenderer(component, {
   method = shallow,
+  defaultProps = {},
   transform = props => props,
   enzymeOptions
 } = {}) {
   const doTransform = props => removeUndefined(transform(props))
-  return (props = {}) => method(createElement(component, doTransform(props)), enzymeOptions)
+  return (props = {}) => {
+    props = { ...defaultProps, ...props }
+    return method(createElement(component, doTransform(props)), enzymeOptions)
+  }
 }
 
 function activate(findMyself) {
