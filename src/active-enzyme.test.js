@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 import * as activeEnzyme from './active-enzyme'
 
 const classNames = {
-  greeting: 'bb67d6ba-33e4-4d4d-863b-50cc3b2d529f',
-  switchLanguage: 'b8100020-f9ba-4ae6-8f88-31f33297c109',
+  greeting: 'bb67d6ba 33e4 4d4d 863b 50cc3b2d529f',
+  switchLanguage: 'b8100020 f9ba 4ae6 8f88 31f33297c109',
 }
 
 it('works', () => {

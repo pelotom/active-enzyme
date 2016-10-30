@@ -41,7 +41,8 @@ function activate(findMyself, classNames) {
     get(target, name) {
       if (classNames)
         name = classNames[name]
-      return find(`.${name}`)
+      const selector = name.split(' ').map(part => '.' + part).join('')
+      return find(selector)
     }
   })
   const overrides = { find, classes }
