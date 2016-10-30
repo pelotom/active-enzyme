@@ -6,38 +6,41 @@ import {
   render as enzymeRender,
 } from 'enzyme'
 
-export function shallow(...args) {
-  const wrapper = enzymeShallow(...args)
-  return activate(() => wrapper)
+export function shallow(elem, opts, classNames) {
+  const wrapper = enzymeShallow(elem, opts)
+  return activate(() => wrapper, classNames)
 }
 
-export function mount(...args) {
-  const wrapper = enzymeMount(...args)
-  return activate(() => wrapper)
+export function mount(elem, opts, classNames) {
+  const wrapper = enzymeMount(elem, opts)
+  return activate(() => wrapper, classNames)
 }
 
-export function render(...args) {
-  const wrapper = enzymeRender(...args)
-  return activate(() => wrapper)
+export function render(elem, opts, classNames) {
+  const wrapper = enzymeRender(elem, opts)
+  return activate(() => wrapper, classNames)
 }
 
 export function makeRenderer(component, {
   method = shallow,
   defaultProps = {},
   transform = props => props,
-  enzymeOptions
+  classNames,
+  enzymeOptions,
 } = {}) {
   const doTransform = props => removeUndefined(transform(props))
   return (props = {}) => {
     props = { ...defaultProps, ...props }
-    return method(createElement(component, doTransform(props)), enzymeOptions)
+    return method(createElement(component, doTransform(props)), enzymeOptions, classNames)
   }
 }
 
-function activate(findMyself) {
+function activate(findMyself, classNames) {
   const find = (...findArgs) => activate(() => findMyself().find(...findArgs))
   const classes = new Proxy({}, {
     get(target, name) {
+      if (classNames)
+        name = classNames[name]
       return find(`.${name}`)
     }
   })

@@ -2,26 +2,29 @@ import React, { Component } from 'react'
 
 import * as activeEnzyme from './active-enzyme'
 
-describe('shallow wrapper', () => {
-  it('is active', () => {
-    ['shallow', 'mount'].forEach(methodName => {
-      const render = activeEnzyme.makeRenderer(Greeting, { method: activeEnzyme[methodName] })
+const classNames = {
+  greeting: 'bb67d6ba-33e4-4d4d-863b-50cc3b2d529f',
+  switchLanguage: 'b8100020-f9ba-4ae6-8f88-31f33297c109',
+}
 
-      const name = 'John'
+it('works', () => {
+  ['shallow', 'mount'].forEach(methodName => {
+    const render = activeEnzyme.makeRenderer(Greeting, { method: activeEnzyme[methodName], classNames })
 
-      const {
-        greeting,
-        switchLanguage
-      } = render({ name }).classes
+    const name = 'John'
 
-      expect(greeting.text()).toBe(`Hello, ${name}!`)
+    const {
+      greeting,
+      switchLanguage
+    } = render({ name }).classes
 
-      switchLanguage.simulate('click')
-      expect(greeting.text()).toBe(`Bonjour, ${name}!`)
+    expect(greeting.text()).toBe(`Hello, ${name}!`)
 
-      switchLanguage.simulate('click')
-      expect(greeting.text()).toBe(`Hello, ${name}!`)
-    })
+    switchLanguage.simulate('click')
+    expect(greeting.text()).toBe(`Bonjour, ${name}!`)
+
+    switchLanguage.simulate('click')
+    expect(greeting.text()).toBe(`Hello, ${name}!`)
   })
 })
 
@@ -39,9 +42,9 @@ class Greeting extends Component {
 
     return (
       <div>
-        <h1 className="greeting">{salutation}, {this.props.name}!</h1>
+        <h1 className={classNames.greeting}>{salutation}, {this.props.name}!</h1>
         <button
-          className="switchLanguage"
+          className={classNames.switchLanguage}
           type="button"
           onClick={() => this.setState({ language: otherLanguage })}
         >
