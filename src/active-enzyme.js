@@ -36,7 +36,7 @@ export function makeRenderer(component, {
 }
 
 function activate(findMyself, classNames) {
-  const find = (...findArgs) => activate(() => findMyself().find(...findArgs))
+  const find = (...findArgs) => activate(() => findMyself().find(...findArgs), classNames)
   const classes = new Proxy({}, {
     get(target, name) {
       if (classNames)
