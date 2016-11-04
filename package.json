@@ -4,7 +4,7 @@
   "description": "Boilerplate-free Enzyme testing",
   "main": "index.js",
   "scripts": {
-    "build": "babel --minified -o index.js src/active-enzyme.js",
+    "build": "babel --minified --source-maps -o index.js src/active-enzyme.js",
     "test": "jest --env=jsdom",
     "test:watch": "npm test -- --watch",
     "release": "xyz",
