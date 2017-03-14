@@ -21,8 +21,20 @@ export function render(elem, opts, classNames) {
   return activate(() => wrapper, classNames)
 }
 
+export function makeShallowRenderer(component, opts) {
+  return makeRenderer(component, { method: shallow, ...opts })
+}
+
+export function makeFullRenderer(component, opts) {
+  return makeRenderer(component, { method: mount, ...opts })
+}
+
+export function makeStaticRenderer(component, opts) {
+  return makeRenderer(component, { method: render, ...opts })
+}
+
 export function makeRenderer(component, {
-  method = shallow,
+  method,
   defaultProps = {},
   transform = props => props,
   classNames,
