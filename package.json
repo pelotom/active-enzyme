@@ -6,11 +6,7 @@
   "scripts": {
     "build": "babel --minified --source-maps -o index.js src/active-enzyme.js",
     "test": "jest --env=jsdom",
-    "test:watch": "npm test -- --watch",
-    "release": "xyz",
-    "release:patch": "xyz --increment patch",
-    "release:minor": "xyz --increment minor",
-    "release:major": "xyz --increment major"
+    "test:watch": "npm test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -48,8 +44,7 @@
     "react": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
     "react-dom": "^15.3.2",
-    "react-test-renderer": "^15.6.1",
-    "xyz": "2.1.0"
+    "react-test-renderer": "^15.6.1"
   },
   "jest": {
     "testPathIgnorePatterns": [
